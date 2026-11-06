@@ -18,11 +18,12 @@
   resize: vertical;
   
 }
-.question-input-button,.answer-input-button {
+.question-input-button,.answer-input-button, .done-button {
   align-items: center;
   width: 60px;
   height: 40px;
   margin-left: 5px;
+  margin-bottom: 5px;
   cursor: pointer;
 }
 .question-container.is-open{
@@ -30,4 +31,9 @@
 }
 .answers-container.is-open{
   display: flex;
+}
+.button-container{
+  display: flex;
+  flex-direction: column;
+  column-gap: 5px;
 }

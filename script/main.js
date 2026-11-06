@@ -1,7 +1,8 @@
 const questionInput = document.querySelector('.js-question-input');
 const answerInput = document.querySelector('.js-answers-input');
 const questionButton = document.querySelector('.js-input-button');
-const answerButton = document.querySelector('.js-input-button-answer')
+const answerButton = document.querySelector('.js-input-button-answer');
+const doneButton = document.querySelector('.js-done-button');
 
 const questions =[];
 let question = '';
@@ -21,6 +22,11 @@ answerButton.addEventListener('click', () => {
     question: question,
     answer: answer
   })
-console.log(questions);
+  localStorage.setItem('data', JSON.stringify(questions));
+  document.querySelector('.question-container').classList.toggle('is-open');
+  document.querySelector('.answers-container').classList.toggle('is-open');
 
+})
+doneButton.addEventListener('click', () => {
+  window.location.href = 'testing.html';
 })
