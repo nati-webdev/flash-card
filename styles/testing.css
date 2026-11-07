@@ -19,5 +19,42 @@ body{
   background: #ffffff;
   box-sizing: border-box;
   padding: 20px;
+  overflow-wrap: break-word;
+  overflow-y: auto;
+
+}
+
+.answer-data-container{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 600;
+  color: #15803d;
+  font-size: 15px;
+  height: 250px;
+  width: 350px;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+  border: 2x solid #22c55e;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #0f172a;
+  box-sizing: border-box;
+  padding: 20px;
+  overflow-wrap: break-word;
+  overflow-y: auto;
+
+}
+.data-container.is-open{
+  display: none;
+}
+.answer-data-container.is-open{
+  display: flex;
+}
+.button-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
 
 }

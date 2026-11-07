@@ -6,21 +6,28 @@
 
     <!-- this is the code for styling-->
      <link rel="stylesheet" href="styles/main.css">
+     <link rel="stylesheet" href="styles/general.css">
   </head>
   <body>
     <h1>Flash cards</h1>
     <h3>Test your limit</h3>
     <div class="question-container">
       <textarea class="question-input js-question-input" type="text" placeholder="Enter your topic" rows="4"></textarea>
+
       <div class="button-container">
       <button class="question-input-button js-input-button" type="button">Add</button>
       <button class="done-button js-done-button" type="button">Done</button>
+      <button class="reset-button js-reset-button" type="button">Reset</button>
       </div>
     </div>
+    
     <div class="answers-container" >
       <textarea class="answers-input js-answers-input" type="text" placeholder="Enter your topic answer" rows="5"></textarea>
       <button class="answer-input-button js-input-button-answer" type="submit">Submit</button>
     </div>
+
+    <button class="expanded-button js-expand" type="button" hidden>Expand</button>
+    <div class="data-container js-data-container"></div>
     
 
     </div>

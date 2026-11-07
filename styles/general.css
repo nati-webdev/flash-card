@@ -1,0 +1,10 @@
+
+.question-input-button,.answer-input-button,
+ .done-button, .skip ,.reveal, .return, .add , .reset-button{
+  align-items: center;
+  width: 60px;
+  height: 40px;
+  margin-left: 26px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
