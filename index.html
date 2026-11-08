@@ -1,36 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Flash card</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcards</title>
     <link rel="icon" type="image/png" href="images/main-icon-fov.jpg">
 
     <!-- this is the code for styling-->
-     <link rel="stylesheet" href="styles/main.css">
-     <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+
   </head>
   <body>
-    <h1>Flash cards</h1>
-    <h3>Test your limit</h3>
-    <div class="question-container">
-      <textarea class="question-input js-question-input" type="text" placeholder="Enter your topic" rows="4"></textarea>
+    <main class="page">
+      <header class="page-header">
+        <h1>Flashcards</h1>
+        <h2 class="page-subtitle">Test your limit</h2>
+      </header>
 
-      <div class="button-container">
-      <button class="question-input-button js-input-button" type="button">Add</button>
-      <button class="done-button js-done-button" type="button">Done</button>
-      <button class="reset-button js-reset-button" type="button">Reset</button>
-      </div>
-    </div>
-    
-    <div class="answers-container" >
-      <textarea class="answers-input js-answers-input" type="text" placeholder="Enter your topic answer" rows="5"></textarea>
-      <button class="answer-input-button js-input-button-answer" type="submit">Submit</button>
-    </div>
+      <section class="question-container" aria-label="Add a flashcard topic">
+        <label class="visually-hidden" for="question-input">Topic</label>
+        <textarea
+          id="question-input"
+          class="question-input js-question-input"
+          placeholder="Enter your topic"
+        ></textarea>
 
-    <button class="expanded-button js-expand" type="button" hidden>Expand</button>
-    <div class="data-container js-data-container"></div>
-    
+        <div class="button-container">
+          <button class="question-input-button js-input-button" type="button">Add</button>
+          <button class="done-button js-done-button" type="button">Done</button>
+          <button class="reset-button js-reset-button" type="button">Reset</button>
+        </div>
+      </section>
 
-    </div>
+      <section class="answers-container" aria-label="Answer a flashcard">
+        <label class="visually-hidden" for="answers-input">Answer</label>
+        <textarea
+          id="answers-input"
+          class="answers-input js-answers-input"
+          placeholder="Enter your topic answer"
+        ></textarea>
+        <button class="answer-input-button js-input-button-answer" type="button">Submit</button>
+      </section>
+
+      <button
+        class="expanded-button js-expand"
+        type="button"
+      >Expand</button>
+
+      <div class="data-container js-data-container"></div>
+    </main>
+
     <script src="script/main.js" type="module"></script>
   </body>
 </html>

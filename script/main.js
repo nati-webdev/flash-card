@@ -9,24 +9,36 @@ const expandButton = document.querySelector('.js-expand');
 
 let Data = loadFromStorage();
 export function loadFromStorage() {
-  return JSON.parse(localStorage.getItem('data')) || [];
+  return JSON.parse(localStorage.getItem('data')) || [{
+    question: 'what is HTML',
+    answer: 'HTML is a mark up language used to structure a web page'
+  },{
+    question: 'what is CSS',
+    answer: 'CSS is a programming language used to style a  web page'
+  },{
+    question: 'what is JavaScript',
+    answer: 'JavaScript is a programming language used to make a website interactive'
+  },{
+    question: 'what is C++',
+    answer: 'C++ is a programming language used to program many sofrware'
+  }];
 }
 
 let question = '';
 let answer = '';
 
 if(questionButton){
-questionButton.addEventListener('click', () => {
-  const Getquestion = questionInput.value;
-  if(Getquestion !== ''){
-  document.querySelector('.question-container').classList.toggle('is-open');
-  document.querySelector('.answers-container').classList.toggle('is-open');
-  question = Getquestion;
-  questionInput.value = '';
-  }
-  
+  questionButton.addEventListener('click', () => {
+    const Getquestion = questionInput.value;
+    if(Getquestion !== ''){
+    document.querySelector('.question-container').classList.toggle('is-open');
+    document.querySelector('.answers-container').classList.toggle('is-open');
+    question = Getquestion;
+    answerInput.value = '';
+    }
+    
 
-})
+  })
 }
 if(answerButton){
 answerButton.addEventListener('click', () => {
@@ -40,7 +52,7 @@ answerButton.addEventListener('click', () => {
   displayData();
   document.querySelector('.question-container').classList.toggle('is-open');
   document.querySelector('.answers-container').classList.toggle('is-open');
-  answerInput.value ='';
+  questionInput.value ='';
 
 
 })
@@ -48,17 +60,30 @@ answerButton.addEventListener('click', () => {
 if(doneButton){
 doneButton.addEventListener('click', () => {
   if(Data && Data.length > 0){
-  window.location.href = `testing.html`;
+  window.location.href = 'testing.html';
   }
-})
+});
 }
 
 if(resetButton){
   resetButton.addEventListener('click', () => {
-    localStorage.removeItem('data');
     Data = [];
+    saveTostorage();
     displayData();
   })
+}
+
+
+if(dataContainer){
+  dataContainer.addEventListener('click', (event) => {
+    const deleteButton = event.target.closest('.link-button');
+    if(!deleteButton) return;
+    
+    const index = Number(deleteButton.dataset.index);
+    Data.splice(index, 1);
+    saveTostorage();
+    displayData();
+  });
 }
 
 function saveTostorage() {
@@ -66,19 +91,19 @@ function saveTostorage() {
 }
 
 function displayData() {
-  let html= '';
-  Data.forEach((item, index) => {
-     html += `<div class="inbox-card">
-                <strong>${index+1}. ${item.question}
-                </strong>
-                  <p>${item.answer}</p>
-          </div>`;
-    
+  if(!dataContainer) return;
+  dataContainer.innerHTML = Data.map((item, index) => `
+      <div class="inbox-card">
+            <strong>${index+1}. ${item.question}
+            </strong>
+              <p>${item.answer}</p>
+                <button type="button" class="link-button" data-index="${index}">
+                  Delete</button>
+       </div>
+  `).join('');
 
-  })
-  if(dataContainer){
-    dataContainer.innerHTML = html;
-    expandButton.hidden = Data.length <= 1;
+  if(expandButton){
+    expandButton.hidden = Data.length <1;
     if(expandButton.hidden){
       dataContainer.classList.remove('expanded');
       expandButton.textContent = 'Expand';

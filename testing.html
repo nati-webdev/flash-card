@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Testing</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcards: Test</title>
     <link rel="icon" type="image/png" href="images/testing-icon-fov.jpg">
 
     <!-- this is the code for styling-->
      <link rel="stylesheet" href="styles/general.css">
      <link rel="stylesheet" href="styles/testing.css">
   </head>
-  <body>
-    <h1>Flash cards</h1>
-    <h3>Start testing your limit</h3>
-    <div class="data-container js-flash-card">
-    </div>
+  <body class="testing-page">
+    <header class="page-header">
+    <h1>Flashcards</h1>
+    <h2 class="page-header">Start testing your limit</h3>
+  </header>
+
+    <div class="data-container js-flash-card"></div>
     
-    <div class="answer-data-container js-flash-card-answer">
-    </div>
+    <div class="answer-data-container js-flash-card-answer"></div>
+
     <div class="button-container">
     <button class="return js-return">Return</button>
     <button class="reveal js-reveal">Reveal</button>
@@ -23,10 +27,6 @@
     <button class="add js-add">Add question</button>
     </div>
 
-    
-    
-
-    </div>
     <script src="script/testing.js" type="module"></script>
   </body>
 </html>
