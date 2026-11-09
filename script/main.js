@@ -2,6 +2,7 @@ const questionInput = document.querySelector('.js-question-input');
 const answerInput = document.querySelector('.js-answers-input');
 const questionButton = document.querySelector('.js-input-button');
 const answerButton = document.querySelector('.js-input-button-answer');
+const aiButton = document.querySelector('.js-ai-button');
 const doneButton = document.querySelector('.js-done-button');
 const resetButton = document.querySelector('.js-reset-button');
 const dataContainer = document.querySelector('.js-data-container');
@@ -54,24 +55,34 @@ answerButton.addEventListener('click', () => {
   document.querySelector('.answers-container').classList.toggle('is-open');
   questionInput.value ='';
 
-
-})
+});
 }
+if(aiButton){
+  aiButton.addEventListener('click', async () => {
+    const topic = question.trim();
+    if(!topic) return;
+    aiButton.textContent = 'Generating...';
+    aiButton.disabled = true;
+   
+});
+}
+
 if(doneButton){
 doneButton.addEventListener('click', () => {
-  if(Data && Data.length > 0){
   window.location.href = 'testing.html';
-  }
+  
 });
 }
 
 if(resetButton){
   resetButton.addEventListener('click', () => {
-    Data = [];
-    saveTostorage();
+    localStorage.removeItem('data');
+    Data = localStorage();
     displayData();
   })
 }
+
+
 
 
 if(dataContainer){
@@ -92,6 +103,15 @@ function saveTostorage() {
 
 function displayData() {
   if(!dataContainer) return;
+
+
+  if(Data.length === 0) {
+  dataContainer.innerHTML = `<p class="empty-message">
+           No cards yet. Add one to get started.</p>`;
+           if(expandButton) expandButton.hidden = true;
+           return;
+ }
+
   dataContainer.innerHTML = Data.map((item, index) => `
       <div class="inbox-card">
             <strong>${index+1}. ${item.question}

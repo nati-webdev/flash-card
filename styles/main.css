@@ -90,7 +90,7 @@ body {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
-.button-container {
+.button-container,.button-container-answer {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -189,6 +189,31 @@ body {
   font-size: 14px;
   text-decoration: underline;
   cursor: pointer;
+}
+.empty-message {
+  color: var(--color-text-muted);
+  text-align: center;
+}
+.ai-generate-button {
+  background-color: #f8fbff;
+  color: var(--color-primary);
+  border: 0 solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+.ai-generate-button:hover{
+  background-color: #eff6ff;
+  transform: translate(-1px);
+}
+.ai-generate-button {
+  transform: translateY(0);
+}
+.ai-image{
+  height: 30px;
+  width: 30px;
 }
 
 /* ---------- Motion preferences ---------- */

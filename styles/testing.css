@@ -22,7 +22,7 @@
   box-sizing: border-box;
 
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   text-align: center;
   background: #ffffff;
@@ -31,6 +31,50 @@
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 
 }
+.data-container {
+  position: relative;
+  padding: 36px 24px 24px;
+  border: 1px solid #dbeafe;
+  border-top: 6px solid var(--color-primary);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow:
+    0 5px 0 -1px #e2e8f0,
+    0 10px 0 -2px #cbd5e1,
+    0 18px 30px rgba(15, 23, 42, 0.12);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-text-strong);
+}
+
+.data-container::before {
+  content: "Question";
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.answer-data-container {
+  position: relative;
+  border-top: 6px solid var(--color-success);
+}
+
+.answer-data-container::before {
+  content: "Answer";
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-success);
+}
+
 
 .answer-data-container{
   display: none;
@@ -60,6 +104,22 @@
   justify-content: center;
   gap: 8px;
   margin-top: 10px;
+}
+.add,
+.skip,
+.return,
+.reveal {
+  padding: 11px 22px;
+  font-family: var(--font-base);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .inbox-card{
