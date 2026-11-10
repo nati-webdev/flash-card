@@ -234,6 +234,13 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: background-color var(--transition-fast), transform var(--transition-fast);
+
+  @media (max-width: 600px){
+    padding: 4px 6px;
+    font-weight: 300;
+    font-size: 10px;
+  }
+  
 }
 .ai-generate-button:hover{
   background-color: #eff6ff;
@@ -245,6 +252,11 @@ body {
 .ai-image{
   height: 30px;
   width: 30px;
+
+  @media (max-width: 600px){
+    height: 11px;
+    width: 11px;
+  }
 }
 
 /* ---------- Motion preferences ---------- */
