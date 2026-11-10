@@ -29,6 +29,10 @@
   overflow-wrap: break-word;
   overflow-y: auto;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  @media (max-width: 600px) {
+    height: 30vh;
+    width: 40vh;
+  }
 
 }
 .data-container {
@@ -45,6 +49,13 @@
   font-size: 1.35rem;
   font-weight: 600;
   color: var(--color-text-strong);
+
+  
+  @media (max-width: 600px){
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
 }
 
 .data-container::before {
@@ -57,6 +68,11 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-primary);
+
+  @media (max-width: 600px){
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
 }
 .answer-data-container {
   position: relative;
@@ -73,6 +89,11 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-success);
+
+  @media (max-width: 600px){
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
 }
 
 
@@ -132,7 +153,6 @@
 .inbox-card + .inbox-card{
   margin-top: 5px;
 }
-
 
 
 @media (prefers-reduced-motion: reduce) {
