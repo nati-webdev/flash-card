@@ -10,19 +10,7 @@ const expandButton = document.querySelector('.js-expand');
 
 let Data = loadFromStorage();
 export function loadFromStorage() {
-  return JSON.parse(localStorage.getItem('data')) || [{
-    question: 'what is HTML',
-    answer: 'HTML is a mark up language used to structure a web page'
-  },{
-    question: 'what is CSS',
-    answer: 'CSS is a programming language used to style a  web page'
-  },{
-    question: 'what is JavaScript',
-    answer: 'JavaScript is a programming language used to make a website interactive'
-  },{
-    question: 'what is C++',
-    answer: 'C++ is a programming language used to program many sofrware'
-  }];
+  return JSON.parse(localStorage.getItem('data')) || [];
 }
 
 let questions = '';
