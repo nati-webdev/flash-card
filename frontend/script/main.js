@@ -25,7 +25,7 @@ export function loadFromStorage() {
   }];
 }
 
-let question = '';
+let questions = '';
 let answer = '';
 
 if(questionButton){
@@ -34,8 +34,8 @@ if(questionButton){
     if(Getquestion !== ''){
     document.querySelector('.question-container').classList.toggle('is-open');
     document.querySelector('.answers-container').classList.toggle('is-open');
-    question = Getquestion;
-    answerInput.value = '';
+    questions = Getquestion;
+    questionInput.value = '';
     }
     
 
@@ -46,24 +46,55 @@ answerButton.addEventListener('click', () => {
   const Getanswer = answerInput.value;
   answer = Getanswer;
   Data.push({
-    question: question,
+    question: questions,
     answer: answer
   })
   saveTostorage();
   displayData();
   document.querySelector('.question-container').classList.toggle('is-open');
   document.querySelector('.answers-container').classList.toggle('is-open');
-  questionInput.value ='';
+  answerInput.value ='';
+  questions = '';
 
 });
 }
 if(aiButton){
   aiButton.addEventListener('click', async () => {
-    const topic = question.trim();
-    if(!topic) return;
+  if(questions === ''){
+    alert('type a question first.');
+    return;
+  }
+    const question = questions;
+    const originalLabel = aiButton.textContent;
     aiButton.textContent = 'Generating...';
     aiButton.disabled = true;
-   
+
+    try {
+    const response = await fetch('http://localhost:3000/api/generate-answer',
+       {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        question: question
+      })
+    });
+   const data = await response.json();
+
+   if(!response.ok) {
+    alert(data.error || 'The server returned an error.');
+    return;
+   }
+  answerInput.value = data.answer.trim();
+  } catch (error) {
+    console.error(error);
+    answerInput.value = 'I love math and physics';
+  } finally {
+    aiButton.textContent = originalLabel;
+    aiButton.disabled = false;
+    
+  }
 });
 }
 
@@ -77,9 +108,9 @@ doneButton.addEventListener('click', () => {
 if(resetButton){
   resetButton.addEventListener('click', () => {
     localStorage.removeItem('data');
-    Data = localStorage();
+    Data = [];
     displayData();
-  })
+  });
 }
 
 
