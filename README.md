@@ -78,4 +78,12 @@ The frontend runs on a different port from the backend, so the server must allow
 | Cards disappear after a refresh | Open the page from the same address each time. localhost and 127.0.0.1 store data separately. |
 | Done does nothing | Add at least one card first. |
 
+## Tech stack
+
+- **Frontend:** HTML, CSS, vanilla JavaScript
+- **Backend:** Node.js and Express
+- **AI answers:** Google Gemini API (`@google/genai`)
+- **Card storage:** Browser `localStorage`
+- **Frontend development:** VS Code Live Server
+
 nodejs.org (https://nodejs.org/)
