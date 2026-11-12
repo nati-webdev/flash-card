@@ -76,8 +76,8 @@ body {
 
 .question-input,
 .answers-input {
-  width: 300px;
-  min-height: 100px;
+  width: 450px;
+  min-height: 250px;
   padding: 16px;
   font-family: var(--font-base);
   font-size: 15px;
