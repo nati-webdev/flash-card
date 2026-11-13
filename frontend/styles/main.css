@@ -10,6 +10,11 @@ body {
   font-family: var(--font-base);
   color: var(--color-text);
 
+  
+  background-color: var(--color-background);
+  background-color: var(--color-background);
+  color: var(--color-text);
+
 
   @media (max-width: 600px){
     padding: 1rem 0.75rem;
@@ -137,7 +142,7 @@ body {
 
 .question-input-button,
 .answer-input-button {
-  color: #ffffff;
+  color: var(--color-text);
   background-color: var(--color-primary);
 }
 
@@ -193,18 +198,32 @@ body {
 }
 
 .data-container.expanded {
-  max-width: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  width: min(400px, calc(100vw - 2rem));
+  max-width: none;
   max-height: 60vh;
+  padding: 16px;
   overflow-y: auto;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.2);
+  transform: translate(-50%, -50%);
 }
 
 .expanded-button {
+  position: relative;
+  z-index: 11;
   margin-top: 40px;
   cursor: pointer;
   width: auto;
   display: inline-block;
   align-self: flex-start;
-
+  background: transparent;
+  color: var(--color-text-strong);
+  border: none;
   @media (max-width: 600px){
       font-size: 12px;
       font-weight: 500;

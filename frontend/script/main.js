@@ -1,20 +1,39 @@
+import { loadFromStorage, loadThemeFromStorage } from "./storage.js";
+
 const questionInput = document.querySelector('.js-question-input');
 const answerInput = document.querySelector('.js-answers-input');
 const questionButton = document.querySelector('.js-input-button');
 const answerButton = document.querySelector('.js-input-button-answer');
 const aiButton = document.querySelector('.js-ai-button');
+const darkMode = document.querySelector('.js-dark-mode');
 const doneButton = document.querySelector('.js-done-button');
 const resetButton = document.querySelector('.js-reset-button');
 const dataContainer = document.querySelector('.js-data-container');
 const expandButton = document.querySelector('.js-expand');
 
+const savedTheme = loadThemeFromStorage();
 let Data = loadFromStorage();
-export function loadFromStorage() {
-  return JSON.parse(localStorage.getItem('data')) || [];
-}
 
 let questions = '';
 let answer = '';
+
+if(savedTheme === 'true'){
+  document.body.classList.add('dark-mode');
+  darkMode.textContent = '☀️';
+}
+
+if(darkMode){
+  darkMode.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    if(darkMode.textContent === '☀️'){
+    darkMode.textContent = '🌙';
+    }else{
+      darkMode.textContent = '☀️';
+    }
+    localStorage.setItem('dark',  document.body.classList.contains('dark-mode'));
+  });
+}
 
 if(questionButton){
   questionButton.addEventListener('click', () => {
@@ -150,7 +169,7 @@ function displayData() {
   }
 }
 
-if(expandButton){
+if(expandButton && dataContainer ){
   expandButton.addEventListener('click', () => {
     dataContainer.classList.toggle('expanded');
     expandButton.textContent = dataContainer.classList.contains('expanded')

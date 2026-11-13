@@ -1,18 +1,30 @@
 .testing-page{
-  min-height: 100vh;
+  position: relative;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 16px;
+  background-color: var(--color-background);
+  
+  color: var(--color-text);
 }
+
 .testing-page.page-header{
   text-align: center;
+}
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0 0 0 0;
 }
 
 .progress-bar-container {
   display: flex;
   flex-direction: row;
+  overflow: hidden;
   height: 16px;
   width: 450px;
 
@@ -21,16 +33,35 @@
   }
 
 }
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-muted);
+}
+.progress-percentage {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-success);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .progress-bar{
   width: 2%;
   height: 100%;
   background-color: green;
   border-radius: 50px;
   overflow-x: hidden;
+  margin-bottom: 0;
+  margin-top: 0;
 
   transition: width 0.5s;
 }
 
+.progress-info p,
+.progress-percentage p{
+  margin: 0;
+}
 .data-container,.answer-data-container{
   display: flex;
   flex-direction: column;
@@ -46,7 +77,7 @@
   border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   text-align: center;
-  background: #ffffff;
+  background: var(--color-background);
   overflow-wrap: break-word;
   overflow-y: auto;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -59,10 +90,10 @@
 .data-container {
   position: relative;
   padding: 36px 24px 24px;
-  border: 1px solid #dbeafe;
+  border: 1px solid var(--color-border);
   border-top: 6px solid var(--color-primary);
   border-radius: 14px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-background) 100%);
   box-shadow:
     0 5px 0 -1px #e2e8f0,
     0 10px 0 -2px #cbd5e1,
@@ -120,7 +151,7 @@
 
 .answer-data-container{
   display: none;
-  background-color: #bbf7d0;
+  background-color: var(--color-answer-background);
   font-weight: 600;
   color: var(--color-success);
   font-size: 19px;
@@ -164,6 +195,8 @@
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
+  color: var(--color-text-strong);
+  background: transparent;
   transition:
     background-color var(--transition-fast),
     transform var(--transition-fast),
