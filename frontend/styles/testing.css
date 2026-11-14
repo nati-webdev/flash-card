@@ -11,6 +11,21 @@
   color: var(--color-text);
 }
 
+@media (min-width: 500px) {
+  .testing-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+    box-sizing: border-box;
+    padding: 14px 1rem;
+    justify-content: flex-start;
+    gap: clamp(8px, 1.5vh, 14px);
+  }
+
+  .testing-page > .site-footer {
+    margin-top: auto;
+  }
+}
+
 .testing-page > .page-header {
   width: min(100%, 450px);
   box-sizing: border-box;
@@ -129,7 +144,7 @@
   align-items: center;
 
   height: 350px;
-  width: 450px;
+  width: min(100%, 450px);
   padding: 20px;
   box-sizing: border-box;
 
@@ -141,12 +156,18 @@
   overflow-wrap: break-word;
   overflow-y: auto;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  @media (max-width: 600px) {
-    height: 30vh;
-    width: 40vh;
-  }
-
 }
+
+@media (max-width: 600px) {
+  .data-container,
+  .answer-data-container {
+    height: clamp(220px, 38vh, 300px);
+    padding-right: 20px;
+    padding-left: 20px;
+    overflow-wrap: anywhere;
+  }
+}
+
 .data-container {
   position: relative;
   padding: 36px 24px 24px;
@@ -162,12 +183,7 @@
   font-weight: 700;
   color: var(--color-text-strong);
 
-  
-  @media (max-width: 600px){
-    font-size: 1.125rem;
-    font-weight: 500;
-  }
-
+  line-height: 1.45;
 }
 
 .data-container::before {
@@ -181,10 +197,6 @@
   text-transform: uppercase;
   color: var(--color-primary);
 
-  @media (max-width: 600px){
-    font-size: 9px;
-    font-weight: 500;
-  }
 }
 .answer-data-container {
   position: relative;
@@ -203,10 +215,6 @@
   text-transform: uppercase;
   color: var(--color-success);
 
-  @media (max-width: 600px){
-    font-size: 1.125rem;
-    font-weight: 500;
-  }
 }
 
 
@@ -217,12 +225,27 @@
   color: var(--color-success);
   font-size: 19px;
 
- @media (max-width: 600px){
-    font-size: 18px;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .data-container {
+    font-size: clamp(1.125rem, 3.6vw, 1.35rem);
+    font-weight: 600;
+  }
+
+  .data-container::before {
+    font-size: 9px;
+  }
+
+  .answer-data-container {
+    font-size: clamp(1.05rem, 3.4vw, 1.2rem);
     font-weight: 500;
   }
 
-
+  .answer-data-container::before {
+    font-size: 0.75rem;
+  }
 }
 .data-container:hover,
 .answer-data-container.is-open:hover {
