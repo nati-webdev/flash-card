@@ -6,6 +6,7 @@ const questionButton = document.querySelector('.js-input-button');
 const answerButton = document.querySelector('.js-input-button-answer');
 const aiButton = document.querySelector('.js-ai-button');
 const darkMode = document.querySelector('.js-dark-mode');
+const darkModeIcon = darkMode?.querySelector('span');
 const doneButton = document.querySelector('.js-done-button');
 const resetButton = document.querySelector('.js-reset-button');
 const dataContainer = document.querySelector('.js-data-container');
@@ -20,7 +21,7 @@ let answer = '';
 
 if(savedTheme === 'true'){
   document.body.classList.add('dark-mode');
-  darkMode.textContent = '☀️';
+  if(darkModeIcon) darkModeIcon.textContent = '☀️';
 }
 
 if(darkMode){
@@ -32,28 +33,17 @@ if(darkMode){
 
     const isDark = document.body.classList.contains('dark-mode');
     darkMode.setAttribute('aria-pressed', String(isDark));
-
-
-    if(darkMode.textContent === '☀️'){
-    darkMode.textContent = '🌙';
-    }else{
-      darkMode.textContent = '☀️';
-    }
+    if(darkModeIcon) darkModeIcon.textContent = isDark ? '☀️' : '🌙';
     localStorage.setItem('dark',  String(isDark));
   });
 }
-if(questionButton) {
-  questionButton.addEventListener('keydown', (event) => {
-    if(event.key === 'Enter'){
-      const Getquestion = questionInput.value;
-    if(Getquestion !== ''){
-    document.querySelector('.question-container').classList.toggle('is-open');
-    document.querySelector('.answers-container').classList.toggle('is-open');
-    questions = Getquestion;
-    questionInput.value = '';
+if(questionInput && questionButton) {
+  questionInput.addEventListener('keydown', (event) => {
+    if(event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      questionButton.click();
     }
-    }
-  })
+  });
 }
 if(questionButton){
   questionButton.addEventListener('click', () => {
@@ -92,6 +82,7 @@ if(aiButton){
     return;
   }
     const question = questions;
+    const originalContent = aiButton.innerHTML;
     aiButton.textContent = 'Generating...';
     aiButton.disabled = true;
 
@@ -115,28 +106,9 @@ if(aiButton){
   answerInput.value = data.answer;
   } catch (error) {
     console.error(error);
-    answerInput.value = 'not working';
+    alert('Could not connect to the AI service. Check your internet connection and try again.');
   } finally {
-    aiButton.textContent = `<img class="ai-image" src="data:image/png;base64,
-            iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAA
-            LEwEAmpwYAAADRklEQVR4nO2YzWsTQRjGp+1BDx6sqAfRZmYbC6IIgiCoVPFQwY
-            qKkJmi0IP9AzxJLHR3PZZWhNDMxOJBEPHQi9WbgrQzKfhxEz+g6FEtCtpmJkkV26
-            xMaULJVzdNNtlgf/DCspmdPM/MvO++LACbbOIPDKbOICq/ISa/BmLqNGgqHKcFMj
-            WLmHJ06Gt9DzQLkCXPZsXnTNBkD2gWEFVP8g0gph6DZsAYT3cgKpcKDFC5BKPpAPA
-            7iMnRIqu/akKNAD+zbyy1B1GZKmmAyXQwktoL/Apiary0+FzEgB+BNNlT9OwX7sKy
-            QRO9wE8YscR+xNS8i9XPxq/O6EIQ+AE0luiCVH2uQHz25fZJG2+oeCMmT0CmflQqfk1
-            V+tmQNmPvvYUdiKlhSOWfDYvP7YT8q5PfYGq358I72EI7onJQn+FqhRfLC0TloP4PL4
-            QbiMoIYirpgfD8N/YiovJBgMoDtaouk7r0eS68SLlFTE1WVa0gk2/qL1zlx6uNG6Dye
-            +MNyLlqdiCMqMw0TDyVGcgSN0DVeaATuGyTVtuATP7WiWwwdQjUimBE7lrdkS+eCacrR3
-            ZYd7XAKwL3na16WyvsfdaLeT1nMOJsAfWia1zuhEw+qsGqP9RzgUYBqbq+ofeELg5U3f
-            LF1wpE5UDlq5+4BvwEZPKOe/FyFPiOCacNUjWz/plXQo91M2UoNNFmET5jYSFs22n13EO
-            AJY+UzQcqM8bd1FG389l90xcsIhwdNhHnQT0oV5n0b+5nclpMwl9mDZhEvNb3gNd0RtXB
-            ku0HVYfdzmMRPpAVn40hHO8H9QBS+bxI4j5z+7xN+HETi8V8AxbhabNPHPNWve6faKI33
-            4ARS55z86yF+VUttFB89ijx1BAWfd46sJ3Wgs/r61QRMyROmZhPlRJeYASLFzbm3Z55gF
-            HZjaj6AJl8b0TlyXJjLcKfuhVu5QcWk6DRmJjPVmHgY6P1g5tX4u0WiYdNIuZcH6GVsfG
-            wfXFqO/ALdmhqm0nEbYvwTGnxPGNiMaLHAr8yhOP9JubLhYnLl3WVAs2AiflQ4erHw6BZ
-            CIUm2kwi3q1Z/bd1aehqiU2mL+eaOSwugWYjpNtpLIRF+LS+brSeTf4L/gHK5axYbM+k9
-            AAAAABJRU5ErkJggg==" alt="bard--v2">Generate with AI`;
+    aiButton.innerHTML = originalContent;
     aiButton.disabled = false;
   }
 });
@@ -175,6 +147,16 @@ function saveTostorage() {
   localStorage.setItem('data', JSON.stringify(Data));
 }
 
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, (character) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[character]);
+}
+
 function displayData() {
   if(!dataContainer) return;
 
@@ -191,9 +173,9 @@ function displayData() {
 
   dataContainer.innerHTML = Data.map((item, index) => `
       <div class="inbox-card">
-            <strong>${index+1}. ${item.question}
+            <strong>${index+1}. ${escapeHTML(item.question)}
             </strong>
-              <p>${item.answer}</p>
+              <p>${escapeHTML(item.answer)}</p>
                 <button type="button" class="link-button" data-index="${index}">
                   Delete</button>
        </div>
@@ -227,4 +209,3 @@ function setListExpanded(isExpanded) {
 }
 
 displayData();
-

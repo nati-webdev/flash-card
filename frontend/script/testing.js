@@ -9,6 +9,7 @@ const flashCard = document.querySelector('.js-flash-card');
 const flashCardAnswer = document.querySelector('.js-flash-card-answer');
 const addQuestion = document.querySelector('.js-add');
 const darkMode = document.querySelector('.js-dark-mode');
+const darkModeIcon = darkMode?.querySelector('span');
 const DarkMode = document.querySelector('.testing-page');
 const progressBar = document.querySelector('.progress-bar');
 const percentage = document.querySelector('.js-percentage');
@@ -85,25 +86,23 @@ if (revealedCount) {
 if(DarkMode && darkMode){
   if(savedTheme === 'true') {
     DarkMode.classList.add('dark-mode');
-    darkMode.textContent = '☀️';
+    if(darkModeIcon) darkModeIcon.textContent = '☀️';
     }
 
-
+  darkMode.setAttribute('aria-pressed', String(DarkMode.classList.contains('dark-mode')));
   darkMode.addEventListener('click', () => {
     DarkMode.classList.toggle('dark-mode');
-    
-    if(darkMode.textContent === '☀️'){
-    darkMode.textContent = '🌙';
-    }else{
-      darkMode.textContent = '☀️';
-    }
-    localStorage.setItem('dark',  DarkMode.classList.contains('dark-mode'));
+
+    const isDark = DarkMode.classList.contains('dark-mode');
+    darkMode.setAttribute('aria-pressed', String(isDark));
+    if(darkModeIcon) darkModeIcon.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('dark', String(isDark));
   });
 }
  
 if(data && data.length > 0) {
   if(flashCard){
-    flashCard.innerHTML = `${data[currentQuestionIndex].question}`;
+    flashCard.textContent = data[currentQuestionIndex].question;
   }
   function setAnswerVisible(isVisible) {
     flashCard.classList.toggle('is-open', isVisible);
@@ -118,7 +117,7 @@ if(data && data.length > 0) {
       if (isAnswerVisible) {
         setAnswerVisible(false);
       } else {
-        flashCardAnswer.innerHTML = `${data[currentQuestionIndex]?.answer}`;
+        flashCardAnswer.textContent = data[currentQuestionIndex]?.answer ?? '';
         animateCard(flashCardAnswer);
         if (!revealedQuestions.has(currentQuestionIndex)) {
           revealedQuestions.add(currentQuestionIndex);
@@ -144,7 +143,7 @@ if(data && data.length > 0) {
         Percentage = PERCENTAGE();
       }
       setAnswerVisible(false);
-      flashCard.innerHTML = `${data[currentQuestionIndex]?.question}`;
+      flashCard.textContent = data[currentQuestionIndex]?.question ?? '';
       animateCard(flashCard);
       progressBar.style.width = progress;
       cardCount.innerHTML = cardCounts(count);
@@ -165,7 +164,7 @@ if(data && data.length > 0) {
       }
       }
         setAnswerVisible(false);
-        flashCard.innerHTML = `${data[currentQuestionIndex]?.question}`;
+        flashCard.textContent = data[currentQuestionIndex]?.question ?? '';
         animateCard(flashCard);
         cardCount.innerHTML = cardCounts(count);
         progressBar.style.width = progress;
