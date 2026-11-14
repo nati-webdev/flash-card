@@ -9,6 +9,8 @@
   --color-placeholder: #94a3b8;
   --color-background: #f8f7f2;
   --color-answer-background: #f1f5f9;
+  --color-card-border: #dbeafe;
+  --color-card-shadow: #e2e8f0;
 
   --color-primary: #2563eb;
   --color-primary-hover: #1d4ed8;
@@ -27,10 +29,12 @@
   --color-surface: #171a23;
   --color-surface-muted: #1e293b;
   --color-neutral-hover: #334155;
-  --color-border: #cbd5e1;
+  --color-border: #475569;
   --color-placeholder: #94a3b8;
   --color-background: #171a23;
   --color-answer-background: #202833;
+  --color-card-border: #334155;
+  --color-card-shadow: #0f172a;
 
   --color-primary: #60a5fa;
   --color-primary-hover: #93c5fd;
@@ -46,4 +50,19 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  @media (max-width: 600px) {
+    top: 10px;
+    right: 3px;
+  }
+}
+.site-footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.site-footer a {
+  color: var(--color-primary);
 }

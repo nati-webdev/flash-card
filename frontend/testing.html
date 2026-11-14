@@ -11,10 +11,18 @@
      <link rel="stylesheet" href="styles/testing.css">
   </head>
   <body class="testing-page">
-    <button type="button" class="dark-mode mode js-dark-mode">🌙</button>
+    <button
+      type="button"
+      class="dark-mode mode js-dark-mode"
+      aria-label="Dark mode"
+      aria-pressed="false"
+    >
+      <span aria-hidden="true">🌙</span>
+    </button>
     <header class="page-header">
       <h1>Flashcards</h1>
-      <h2 class="page-header">Start testing your limit</h3>
+      <h2>Start testing your limit</h2>
+      <p id="study-streak" class="study-streak" aria-live="polite">Study streak: 0 days</p>
     </header>
 
     <div class="progress-container">
@@ -50,6 +58,11 @@
     <button class="add js-add">Add question</button>
     </div>
 
-    <script src="script/testing.js" type="module"></script>
+  <script src="script/testing.js" type="module"></script>
+  <footer class="site-footer">
+      Built by <a href="https://github.com/nati-webdev">Natnael Bahru</a>
+      <span aria-hidden="true">·</span>
+      Version 1.0.0
+  </footer>
   </body>
 </html>

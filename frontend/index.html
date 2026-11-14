@@ -13,7 +13,14 @@
   </head>
   <body>
     <main class="page">
-     <button type="button" class="dark-mode mode js-dark-mode">🌙</button>
+      <button
+        type="button"
+        class="dark-mode mode js-dark-mode"
+        aria-label="Dark mode"
+        aria-pressed="false"
+      >
+        <span aria-hidden="true">🌙</span>
+      </button>
       <header class="page-header">
         <h1>Flashcards</h1>
         <h2 class="page-subtitle">Test your limit</h2>
@@ -70,11 +77,19 @@
       <button
         class="expanded-button js-expand"
         type="button"
+        aria-expanded="false"
+        aria-controls="flashcard-list"
       >Expand</button>
 
-      <div class="data-container js-data-container"></div>
+      <button class="list-backdrop js-list-backdrop" type="button" aria-label="Close expanded card list" hidden></button>
+      <div id="flashcard-list" class="data-container js-data-container"></div>
     </main>
 
-    <script src="script/main.js" type="module"></script>
+  <script src="script/main.js" type="module"></script>
+  <footer class="site-footer">
+      Built by <a href="https://github.com/nati-webdev">Natnael Bahru</a>
+      <span aria-hidden="true">·</span>
+      Version 1.0.0
+  </footer>
   </body>
 </html>
