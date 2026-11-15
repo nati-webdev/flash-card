@@ -2,12 +2,10 @@
 
 A simple app for creating flashcards and testing yourself. Cards are saved in your browser, and the app includes dark mode, quiz progress, and optional AI answer suggestions.
 
-Built by Natnael Bahru · Version 1.0.0
-
 ## Screenshot
 
 ![Flashcards app home page](screenshots/home.jpg)
-![Flashcards app screenshot](screenshots/app.png)
+![Flashcards app screenshot](screenshots/app.jpg)
 
 
 ## Features
