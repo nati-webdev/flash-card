@@ -12,8 +12,9 @@ body {
 
   
   background-color: var(--color-background);
-  background-color: var(--color-background);
-  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
 
   @media (max-width: 600px){
@@ -25,14 +26,18 @@ body {
   max-width: 720px;
   margin: 0 auto;
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+
 
   @media (max-width: 600px){
     max-width: 100%;
     align-items: stretch;
     gap: 12px;
+    margin-left: 0;
+    margin-right: 0;
   }
 
 }
