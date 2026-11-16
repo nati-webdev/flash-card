@@ -1,7 +1,6 @@
 import { loadFromStorage, loadThemeFromStorage } from "./storage.js";
 
 let data = loadFromStorage();
-console.log(data);
 const skipButton = document.querySelector('.js-skip');
 const revealButton = document.querySelector('.js-reveal');
 const returnButton = document.querySelector('.js-return');
