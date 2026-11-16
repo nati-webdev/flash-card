@@ -1,6 +1,7 @@
 import { loadFromStorage, loadThemeFromStorage } from "./storage.js";
 
 let data = loadFromStorage();
+console.log(data);
 const skipButton = document.querySelector('.js-skip');
 const revealButton = document.querySelector('.js-reveal');
 const returnButton = document.querySelector('.js-return');
@@ -97,3 +98,103 @@ if(DarkMode && darkMode){
     if(darkModeIcon) darkModeIcon.textContent = isDark ? '☀️' : '🌙';
     localStorage.setItem('dark', String(isDark));
   });
+}
+ 
+if(data && data.length > 0) {
+  if(flashCard){
+    flashCard.textContent = data[currentQuestionIndex].question;
+  }
+  function setAnswerVisible(isVisible) {
+    flashCard.classList.toggle('is-open', isVisible);
+    flashCardAnswer.classList.toggle('is-open', isVisible);
+    revealButton.textContent = isVisible ? 'Hide answer' : 'Reveal';
+    revealButton.setAttribute('aria-expanded', String(isVisible));
+  }
+
+  if(revealButton){
+    revealButton.addEventListener('click', () => {
+      const isAnswerVisible = flashCardAnswer.classList.contains('is-open');
+      if (isAnswerVisible) {
+        setAnswerVisible(false);
+      } else {
+        flashCardAnswer.textContent = data[currentQuestionIndex]?.answer ?? '';
+        animateCard(flashCardAnswer);
+        if (!revealedQuestions.has(currentQuestionIndex)) {
+          revealedQuestions.add(currentQuestionIndex);
+          if (revealedCount) {
+            revealedCount.textContent = `${revealedQuestions.size}/${data.length}`;
+          }
+        }
+        setAnswerVisible(true);
+      }
+      recordStudyDay();
+    });
+  }
+  if(skipButton){
+    skipButton.addEventListener('click', () => {
+      if(currentQuestionIndex >= data.length - 1){
+        flashCard.innerHTML ='You reached the end. Add some topics to study';
+        progressBar.style.width = '100%';
+        return;
+      }else if(currentQuestionIndex < data.length - 1){
+        currentQuestionIndex ++;
+        progress = calculateProgress();
+        count = currentQuestionIndex + 1;
+        Percentage = PERCENTAGE();
+      }
+      setAnswerVisible(false);
+      flashCard.textContent = data[currentQuestionIndex]?.question ?? '';
+      animateCard(flashCard);
+      progressBar.style.width = progress;
+      cardCount.innerHTML = cardCounts(count);
+      percentage.innerHTML = `${Percentage}% completed`;
+    });
+  }
+  if(returnButton) {
+    returnButton.addEventListener('click', () => {
+      if(currentQuestionIndex >0){
+      currentQuestionIndex--;
+      count = currentQuestionIndex + 1;
+      Percentage = PERCENTAGE();
+
+      if(currentQuestionIndex === 0){
+        progress = `2%`;
+      }else{
+        progress = calculateProgress();
+      }
+      }
+        setAnswerVisible(false);
+        flashCard.textContent = data[currentQuestionIndex]?.question ?? '';
+        animateCard(flashCard);
+        cardCount.innerHTML = cardCounts(count);
+        progressBar.style.width = progress;
+        percentage.innerHTML = `${Percentage}% completed`;
+    });
+  }
+  function calculateProgress(){
+    const RawProgress = (currentQuestionIndex / (data.length-1)) * 100;
+    const result = RawProgress.toFixed(0);
+    const Progress = `${result}%`;
+    return Progress;
+  }
+
+  function cardCounts(count){
+    const CardCount = `${count}/${data.length}`;
+    return CardCount;
+  }
+
+  function PERCENTAGE() {
+    const Rawpercentage = (currentQuestionIndex / (data.length - 1)) * 100;
+    const percentage = Rawpercentage.toFixed(0);
+    return percentage;
+  }
+}else{
+  if(flashCard){
+  flashCard.innerHTML ='Add some topics to study';
+  }
+}
+if(addQuestion){
+    addQuestion.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+  }
